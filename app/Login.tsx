@@ -7,17 +7,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = () => {
-    const [email,setEmail] = useState("xammadaxmed@gmail.com")
-    const [password,setPassword] = useState("hammad")
+    const [email,setEmail] = useState("test@example.com")
+    const [password,setPassword] = useState("test")
     const navigation = useNavigation()
 
     const handleLogin = async () => {
-        let data = await LoginPost(email,password)
-        if(data !=null){
-            AsyncStorage.setItem('AUTH_TOKEN', data.token)
-            console.log("Successfully Logged In")
-            navigation.navigate("Home")
-        }
+        navigation.navigate("Home")
     };
 
 

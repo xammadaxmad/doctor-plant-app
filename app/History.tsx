@@ -5,20 +5,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { GetHistoryList } from '../providers/apiProvider.mjs';
 
 const History = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(function(){
-    GetHistoryList().then(response=>{
-      if (response!=null){
-        setData(response)
-      }
-    })
-  },[])
-
-  setTimeout(() => {
-    console.log(data)
-  }, 2000);
-
+  const [data, setData] = useState([
+    {_id:'1',created_at:'10/02/2023T10:02:02',disease:'disease name'}
+  ]);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -31,7 +20,7 @@ const History = () => {
       <ScrollView style={styles.scrollView}>
         {data.map(item => (
           <View key={item._id} style={styles.listItem}>
-            <Image source={{ uri: item.image_path }} style={styles.diseaseImage} resizeMode="contain" />
+            <Image source={require('../assets/images/logo.png')} style={styles.diseaseImage} resizeMode="contain" />
             <View style={styles.textContainer}>
               <Text style={styles.dateText}>Date: {item.created_at.replace('/','-').replace('/','-').split('T')[0]}</Text>
               <Text style={styles.diseaseText}>Disease: {item.disease}</Text>

@@ -33,26 +33,7 @@ const UploadScreen = () => {
     };
 
     const handleUpload = async() => {
-        if (!image) {
-            Alert.alert('No Image Selected', 'Please select an image before uploading.');
-            return;
-        }
-        setInProgress(true)
-        let data = await UploadImage(image)
-        if(data !=null){
-            console.log(data)
-            setInProgress(false)
-            let params = {
-                id:data._id,
-                image_path:data.image_path,
-                created_at:data.created_at.split('T')[0],
-                disease:data.disease
-            }
-            navigation.navigate("DiseaseInfo",params)
-        }
-        else{
-            setInProgress(false)
-        }
+      
     };
 
     return (

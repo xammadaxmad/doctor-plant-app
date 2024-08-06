@@ -21,7 +21,7 @@ const Home = ({ }) => {
     };
 
     const handleLogout = () => {
-        navigation.navigate("StartUp")
+        navigation.navigate("index")
     };
 
     return (

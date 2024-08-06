@@ -10,10 +10,7 @@ const Register = ({  }) => {
   const [password,setPassword] = useState(null)
     const navigation = useNavigation();
   const handleRegister = async() => {
-    let data = await RegisterPost(username,email,password)
-    if(data != null){
-      navigation.navigate("Login")
-    }
+    
   };
 
   return (
