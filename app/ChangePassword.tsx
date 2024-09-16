@@ -1,24 +1,21 @@
 // ChangePasswordScreen.js
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable, Image } from 'react-native';
+import { Alert } from "react-native";
+import {ChangePasswordPost} from "../providers/apiProvider.mjs"
 
 const ChangePassword = () => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleChangePassword = () => {
-        // Implement your change password logic here
-        if (newPassword !== confirmPassword) {
-            alert('New password and confirm password do not match.');
-            return;
-        }
-
+    const handleChangePassword = async() => {
         // Example: Here you would typically make an API call to change the password
         console.log('Change Password');
         console.log('Current Password:', currentPassword);
         console.log('New Password:', newPassword);
         console.log('Confirm Password:', confirmPassword);
+        let data = await ChangePasswordPost(currentPassword,newPassword,confirmPassword)
     };
 
     return (

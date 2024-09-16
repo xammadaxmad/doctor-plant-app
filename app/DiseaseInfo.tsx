@@ -8,6 +8,7 @@ const DiseaseInfo = () => {
     const [image, setImage] = useState(route.params.image_path); // State for image URI
     const [createdAt, setCreatedAt] = useState(route.params.created_at); // Example date
     const [diseaseName, setDiseaseName] = useState(route.params.disease); // Example disease name
+    const [probability, setProbability] = useState(route.params.probability); // Example disease name
 
     return (
         <View style={styles.container}>
@@ -29,6 +30,7 @@ const DiseaseInfo = () => {
                 <View style={styles.labelRow}>
                     <FontAwesome name="heartbeat" size={18} color="#333" style={styles.icon} />
                     <Text style={styles.labelText}>Disease: {diseaseName}</Text>
+                    <Text style={styles.labelText}>Probability: {probability}</Text>
                 </View>
             </View>
         </View>

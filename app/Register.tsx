@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable, Image } from 'react-native';
 import { RegisterPost } from '../providers/apiProvider.mjs';
 
-const Register = ({  }) => {
+const Register = () => {
   const [username,setUsername] = useState(null)
   const [email,setEmail] = useState(null)
   const [password,setPassword] = useState(null)

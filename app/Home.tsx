@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Pressable, Image } from 'react-native';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = ({ }) => {
     const navigation = useNavigation();
@@ -21,7 +22,12 @@ const Home = ({ }) => {
     };
 
     const handleLogout = () => {
-        navigation.navigate("StartUp")
+        AsyncStorage.removeItem('AUTH_TOKEN')
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'index' }],
+        })
+        navigation.navigate("index")
     };
 
     return (

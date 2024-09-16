@@ -1,6 +1,8 @@
 import { Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const API_BASE_URL = "http://192.168.8.110:3000/api"
+const API_BASE_URL = "http://localhost:3000/api"
+
+
 const LoginPost = async (email, password) => {
   try {
     const URL = `${API_BASE_URL}/auth/login`
@@ -24,8 +26,6 @@ const LoginPost = async (email, password) => {
     return null
   }
 }
-
-
 
 
 const RegisterPost = async (username, email, password) => {
@@ -81,7 +81,7 @@ const GetHistoryList = async () => {
 
 async function UploadImage(image) {
   try {
-  
+
     let formData = new FormData();
     formData.append('image', {
       uri: image,
@@ -108,14 +108,95 @@ async function UploadImage(image) {
       const resp = await response.json();
       return resp.data
     }
- 
+
   } catch (error) {
     console.log(error.message)
   }
 }
 
+const ChangePasswordPost = async (currentPassword, newPassword, confirmPassword) => {
+  if (newPassword !== confirmPassword) {
+    console.log("New Password and Confirm Password is not same")
+    Alert.alert("Failed", "New Password and Confirm Password are not same")
+    return;
+  }
+
+  try {
+    const URL = `${API_BASE_URL}/user/change-password`
+    const token = await GetToken()
+    const AUTHTOKEN = `Bearer ${token}`
+    const response = await fetch(URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization":AUTHTOKEN
+      },
+      body: JSON.stringify({ newPassword, currentPassword }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Process Failed! Please try again');
+    }
+
+    const resp = await response.json();
+    return resp.data
+  } catch (error) {
+    console.error('Updation Error:', error);
+    Alert.alert('Updation Error:', 'Failed to change password. Please try again.');
+    return null
+  }
+}
 
 
+const HistoryListItemRemoveDelete = async (id) => {
+  try {
+    const URL = `${API_BASE_URL}/history/${id}`
+    const token = await GetToken()
+    const response = await fetch(URL, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Could not delete list item');
+    }
+
+    const resp = await response.json();
+    return resp.data
+  } catch (error) {
+    console.error('History Error:', error);
+    Alert.alert('History Error:', 'Could not delete list item');
+    return null
+  }
+}
+
+
+const ForgetPasswordPost = async (email) => {
+  try {
+    const URL = `${API_BASE_URL}/auth/forgot-password`
+    const response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Recovery Failed! Please try again');
+    }
+
+    const resp = await response.json();
+    return resp.data
+  } catch (error) {
+    console.error('Recovery Error:', error);
+    Alert.alert('Recovery Error:', 'Failed to recover password. Please try again.');
+    return null
+  }
+}
 
 
 
@@ -132,5 +213,8 @@ export {
   LoginPost,
   RegisterPost,
   GetHistoryList,
-  UploadImage
+  UploadImage,
+  ChangePasswordPost,
+  HistoryListItemRemoveDelete,
+  ForgetPasswordPost
 }

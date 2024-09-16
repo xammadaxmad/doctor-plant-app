@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, View, Text, TextInput, Pressable, Image } from 'react-native';
 import { LoginPost } from '../providers/apiProvider.mjs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Network from 'expo-network';
 
 
 const Login = () => {

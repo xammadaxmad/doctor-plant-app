@@ -1,12 +1,21 @@
 // ForgotPasswordScreen.js
-import React from 'react';
+import { ForgetPasswordPost } from '@/providers/apiProvider.mjs';
+import { useNavigation } from 'expo-router';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Pressable, Image } from 'react-native';
 
-const ForgotPassword = ({  }) => {
+const ForgotPassword = ({ }) => {
+  const navigate = useNavigation()
+  const [email, setEmail] = useState("")
   const handleResetPassword = () => {
-    // Implement your password reset logic here
-    console.log('Reset Password button pressed');
+    ForgetPasswordPost(email).then(response => {
+      console.log(response)
+    })
   };
+
+  const handleLoginBack = () => {
+    navigate.navigate("Login")
+  }
 
   return (
     <View style={styles.container}>
@@ -26,6 +35,8 @@ const ForgotPassword = ({  }) => {
           placeholderTextColor="#9E9E9E"
           keyboardType="email-address"
           autoCapitalize="none"
+          value={email}
+          onChangeText={text => setEmail(text)}
         />
         <Pressable
           style={({ pressed }) => [
