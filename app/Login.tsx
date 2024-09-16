@@ -8,8 +8,8 @@ import * as Network from 'expo-network';
 
 
 const Login = () => {
-    const [email,setEmail] = useState("xammadaxmed@gmail.com")
-    const [password,setPassword] = useState("hammad")
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
     const navigation = useNavigation()
 
     const handleLogin = async () => {

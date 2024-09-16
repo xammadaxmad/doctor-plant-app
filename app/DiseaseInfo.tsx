@@ -30,8 +30,13 @@ const DiseaseInfo = () => {
                 <View style={styles.labelRow}>
                     <FontAwesome name="heartbeat" size={18} color="#333" style={styles.icon} />
                     <Text style={styles.labelText}>Disease: {diseaseName}</Text>
+                </View>
+
+                <View style={styles.labelRow}>
+                    <FontAwesome name="percent" size={18} color="#333" style={styles.icon} />
                     <Text style={styles.labelText}>Probability: {probability}</Text>
                 </View>
+                
             </View>
         </View>
     );

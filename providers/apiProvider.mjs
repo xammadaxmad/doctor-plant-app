@@ -1,6 +1,6 @@
 import { Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const API_BASE_URL = "http://localhost:3000/api"
+const API_BASE_URL = "http://192.168.240.7:3000/api"
 
 
 const LoginPost = async (email, password) => {
@@ -129,7 +129,7 @@ const ChangePasswordPost = async (currentPassword, newPassword, confirmPassword)
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "Authorization":AUTHTOKEN
+        "Authorization": AUTHTOKEN
       },
       body: JSON.stringify({ newPassword, currentPassword }),
     });
@@ -139,6 +139,7 @@ const ChangePasswordPost = async (currentPassword, newPassword, confirmPassword)
     }
 
     const resp = await response.json();
+    Alert.alert('Password', 'Password has been changed successfully');
     return resp.data
   } catch (error) {
     console.error('Updation Error:', error);
@@ -168,7 +169,6 @@ const HistoryListItemRemoveDelete = async (id) => {
     return resp.data
   } catch (error) {
     console.error('History Error:', error);
-    Alert.alert('History Error:', 'Could not delete list item');
     return null
   }
 }
@@ -193,16 +193,9 @@ const ForgetPasswordPost = async (email) => {
     return resp.data
   } catch (error) {
     console.error('Recovery Error:', error);
-    Alert.alert('Recovery Error:', 'Failed to recover password. Please try again.');
     return null
   }
 }
-
-
-
-
-
-
 
 async function GetToken() {
   token = await AsyncStorage.getItem('AUTH_TOKEN')

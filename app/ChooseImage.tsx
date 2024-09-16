@@ -46,7 +46,8 @@ const UploadScreen = () => {
                 id:data._id,
                 image_path:data.image_path,
                 created_at:data.created_at.split('T')[0],
-                disease:data.disease
+                disease:data.disease,
+                probability:data.probability
             }
             navigation.navigate("DiseaseInfo",params)
         }

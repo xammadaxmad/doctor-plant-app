@@ -9,13 +9,10 @@ const ForgotPassword = ({ }) => {
   const [email, setEmail] = useState("")
   const handleResetPassword = () => {
     ForgetPasswordPost(email).then(response => {
-      console.log(response)
+      navigate.navigate("Login")
     })
   };
 
-  const handleLoginBack = () => {
-    navigate.navigate("Login")
-  }
 
   return (
     <View style={styles.container}>
